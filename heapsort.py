@@ -1,5 +1,6 @@
 import logging
 
+
 class HeapSort:
     inputList = []
     sortedList = []
@@ -12,23 +13,20 @@ class HeapSort:
         except BaseException:
             logging.error("Error occurred while sort array:")
 
-
     def heapsort(self, aList):
         for lastPos in range(len(aList) - 1, 0, -1):
-            lastParent = (lastPos-1) // 2
+            lastParent = (lastPos - 1) // 2
             for i in range(lastParent, -1, -1):
                 self.moveDown(aList, i, lastPos)
             if aList[0] > aList[lastPos]:
                 self.swap(aList, 0, lastPos)
 
-
     def moveDown(self, aList, parentPos, lastPos):
-        largestPos = 2 * parentPos + 1
+        largestPos = 2 * parentPos
+        if aList[largestPos + 1] > aList[largestPos]:
+            largestPos += 1
         if aList[largestPos] > aList[parentPos]:
             self.swap(aList, largestPos, parentPos)
 
-
     def swap(self, A, x, y):
-        tmp = A[x]
-        A[x] = A[y]
-        A[y] = tmp
+        A[x], A[y] = A[y], A[x]
