@@ -1,4 +1,5 @@
 import logging
+import swap
 
 
 class HeapSort:
@@ -19,14 +20,12 @@ class HeapSort:
             for i in range(lastParent, -1, -1):
                 self.moveDown(aList, i, lastPos)
             if aList[0] > aList[lastPos]:
-                self.swap(aList, 0, lastPos)
+                swap.swap(aList, 0, lastPos)
 
     def moveDown(self, aList, parentPos, lastPos):
         largestPos = 2 * parentPos
         if aList[largestPos + 1] > aList[largestPos]:
             largestPos += 1
         if aList[largestPos] > aList[parentPos]:
-            self.swap(aList, largestPos, parentPos)
+            swap.swap(aList, largestPos, parentPos)
 
-    def swap(self, A, x, y):
-        A[x], A[y] = A[y], A[x]

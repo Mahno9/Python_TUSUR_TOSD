@@ -1,7 +1,12 @@
+from pprint import pprint, pformat
 import logging
 import sys
-import heapsort
 import numpy
+
+import heapsort
+import quicksort
+import prim
+from graphs import Edge
 
 def initLog():
     print("Initialize logging...")
@@ -20,19 +25,42 @@ def initLog():
 initLog()
 
 
-
 def checkForSortedArray(aList):
-    for i in range(len(aList)-1):
-        if (aList[i] > aList[i+1]):
-            logging.error("Array was not sorted: array[{0}]:{1} > array[{2}]:{3}".format(i, aList[i], i+1, aList[i+1]))
+    for i in range(len(aList) - 1):
+        if (aList[i] > aList[i + 1]):
+            logging.error(
+                "Array was not sorted: array[{0}]:{1} > array[{2}]:{3}".format(i, aList[i], i + 1, aList[i + 1]))
             return
-    logging.info("*Checked for sorting*")
+    logging.info("*Checked for sorting*\n")
+
+
+def genereateGraph():
+    graph = [
+        Edge("A", "B", 7),
+        Edge("A", "D", 5),
+        Edge("C", "B", 8),
+        Edge("D", "B", 9),
+        Edge("E", "B", 7),
+        Edge("D", "E", 15),
+        Edge("C", "E", 5),
+        Edge("F", "E", 8),
+        Edge("G", "E", 9),
+        Edge("D", "F", 6),
+        Edge("G", "F", 11)
+    ]
+    return graph
+
 
 arrayToSort = numpy.random.randint(-100, 100, 10)
-# arrayToSort = [-66, -37, -90, 70, -88]
-# arrayToSort = [65, -55, 44, -44, 2, -84, 59, 77, 18, 78]
-logging.info("Init array:\n{0}".format(arrayToSort))
+logging.info("Init array:\n{0}\n".format(arrayToSort))
 
 heapSort = heapsort.HeapSort(arrayToSort)
-logging.info("Heapsort sorted array:\n{0}".format(heapSort.sortedList))
+logging.info("HeapSort sorted array:\n{0}".format(heapSort.sortedList))
 checkForSortedArray(heapSort.sortedList)
+
+quickSort = quicksort.QuickSort(arrayToSort)
+logging.info("QuickSort sorted array:\n{0}".format(quickSort.sortedList))
+checkForSortedArray(quickSort.sortedList)
+
+graph = genereateGraph()
+logging.info("Init graph:\n{0}\n".format(pformat(graph)))
