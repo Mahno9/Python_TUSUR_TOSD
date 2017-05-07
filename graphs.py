@@ -21,14 +21,44 @@ class Edge:
         if value is not None:
             self.value = value
 
-    def contains(self, node):
-        return node in self.nodes
-
     def isAdjacencyWith(self, other):
         if set(self.nodes).difference(set(other.nodes)) is not None and \
                         set(self.nodes).intersection(set(other.nodes)) is not None:
             return True
         return False
+
+    def contains(self, node):
+        return node in self.nodes
+
+    def getNeighbour(self, node):
+        if self.nodes[0] == node:
+            return self.nodes[1]
+        elif self.nodes[1] == node:
+            return self.nodes[0]
+        else:
+            return None
+
+    def __eq__(self, other):
+        if hasattr(self, "value") and hasattr(other, "value"):
+            return self.value == other.value
+        else:
+            return set(self.nodes) == set(other.nodes)
+
+    def __gt__(self, other):
+        if hasattr(self, "value") and hasattr(other, "value"):
+            return self.value > other.value
+        raise AttributeError("No value attribute. Nothing to compare")
+
+    def __lt__(self, other):
+        if hasattr(self, "value") and hasattr(other, "value"):
+            return self.value < other.value
+        raise AttributeError("No value attribute. Nothing to compare")
+
+    def __hash__(self):
+        return hash(repr(self))
+
+    def __cmp__(self, other):
+        return self.value - other.value
 
     def __str__(self):
         return self.__repr__()

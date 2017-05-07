@@ -3,9 +3,9 @@ import logging
 import sys
 import numpy
 
-import heapsort
-import quicksort
-import prim
+from heapsort import HeapSort
+from quicksort import QuickSort
+from prim import Prim
 from graphs import Edge
 
 def initLog():
@@ -54,13 +54,18 @@ def genereateGraph():
 arrayToSort = numpy.random.randint(-100, 100, 10)
 logging.info("Init array:\n{0}\n".format(arrayToSort))
 
-heapSort = heapsort.HeapSort(arrayToSort)
+heapSort = HeapSort(arrayToSort)
 logging.info("HeapSort sorted array:\n{0}".format(heapSort.sortedList))
 checkForSortedArray(heapSort.sortedList)
 
-quickSort = quicksort.QuickSort(arrayToSort)
+quickSort = QuickSort(arrayToSort)
 logging.info("QuickSort sorted array:\n{0}".format(quickSort.sortedList))
 checkForSortedArray(quickSort.sortedList)
 
+
 graph = genereateGraph()
 logging.info("Init graph:\n{0}\n".format(pformat(graph)))
+
+primCalc = Prim(graph)
+logging.info("Prim minimal spacing tree:\n{0}".format(primCalc.minimalSpacingTree))
+
