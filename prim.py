@@ -1,10 +1,7 @@
 import logging
-from graphs import Edge
 
 
 class Prim:
-    # inputGraph = []
-    # minimalSpacingTree = []
 
     def __init__(self, inputList):
         try:
@@ -20,14 +17,23 @@ class Prim:
 
         while nodesCount > len(nodes):
             adjacencyEdges = set()
+
+            # Pick adjacency edges for current tree
             for node in nodes:
                 adjacencyEdges = adjacencyEdges.union(
                     set([edge for edge in graph
                          if edge.contains(node)
                             and not edge.getNeighbour(node) in nodes])
                 )
+
+            if len(adjacencyEdges) == 0:
+                return None
+
+            # Save only minimal edge
             adjacencyEdges = adjacencyEdges - set(minSpacingTree)
             minSpacingTree.append(min(adjacencyEdges))
+
+            # Save new edge as included in tree
             for edge in minSpacingTree:
                 nodes = nodes.union(set(edge.nodes))
 

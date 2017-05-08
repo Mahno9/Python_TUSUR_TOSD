@@ -5,8 +5,9 @@ import numpy
 
 from heapsort import HeapSort
 from quicksort import QuickSort
-from prim import Prim
 from graphs import Edge
+from euler import Euler
+from prim import Prim
 
 def initLog():
     print("Initialize logging...")
@@ -15,7 +16,7 @@ def initLog():
     rootLogger.setLevel(logging.DEBUG)
 
     fileName = u'log.txt'
-    fileHandler = logging.FileHandler(fileName)
+    fileHandler = logging.FileHandler(fileName, mode="w")
     fileHandler.setFormatter(logFormatter)
     rootLogger.addHandler(fileHandler)
 
@@ -67,5 +68,12 @@ graph = genereateGraph()
 logging.info("Init graph:\n{0}\n".format(pformat(graph)))
 
 primCalc = Prim(graph)
-logging.info("Prim minimal spacing tree:\n{0}".format(primCalc.minimalSpacingTree))
+logging.info("Prim minimal spacing tree:\n{0}"
+              .format(primCalc.minimalSpacingTree))
+
+eulerCalc = Euler(graph)
+eulerPathOrCycle = "cycle" if eulerCalc.eulerPath[0] == eulerCalc.eulerPath[-1]\
+                    else "path"
+logging.info("Euler {1}:\n{0}"
+             .format(eulerCalc.eulerPath, eulerPathOrCycle))
 
