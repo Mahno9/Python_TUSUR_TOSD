@@ -2,6 +2,7 @@
 *.log
 .idea/*
 log/*
+__pycache__/*
 log.txt
 
 # Standart templates
