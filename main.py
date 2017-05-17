@@ -35,25 +35,6 @@ boiledV = 0
 nonBoiledV = V
 i = 0
 
-# teapotPartOfV = teapotV / V
-# while nonBoiledV >= needNonBoiled:
-#     V_of_nonBoilded_for_boil = teapotPartOfV * nonBoiledV
-#     V_of_boilded_for_boil = teapotPartOfV * boiledV
-#     boiledV -= V_of_boilded_for_boil
-#     nonBoiledV -= V_of_nonBoilded_for_boil
-#
-#     VForBoil = V_of_nonBoilded_for_boil + V_of_boilded_for_boil
-#     boiledV += VForBoil
-#     i+=1
-#
-#     logging.info("\n"
-#                  "Шаг {0}\n"
-#                  "Кипятилось кипячёной: {1}\n"
-#                  "Кипятилось не кипячёной: {2}\n"
-#                  "Кипячёной: {3}\n"
-#                  "Не кипячёной: {4}\n".format(i, V_of_boilded_for_boil, V_of_nonBoilded_for_boil, boiledV, nonBoiledV))
-#
-# exit(0)  # Test for quarium task
 
 def checkForSortedArray(aList):
     for i in range(len(aList) - 1):
